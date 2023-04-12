@@ -137,7 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        body: pages[currpage],
+        body: IndexedStack(
+          index: currpage,
+          children: pages,
+        ),
         bottomNavigationBar: NavigationBar(
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
