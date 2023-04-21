@@ -10,27 +10,30 @@ class HomePage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(top: 16.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: IconButton(
-                  icon: const CircleAvatar(
-                    radius: 60,
-                    backgroundImage: AssetImage('images/profile.jpg'),
-                  ),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  iconSize: 48.0,
+              IconButton(
+                icon: const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage('images/profile.jpg'),
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                iconSize: 48.0,
+              ),
+              const Center(
+                child: Text(
+                  'Current Location',
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
-              const Expanded(
-                child: Center(
-                  child: Text(
-                    'Current Location',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
+              IconButton(
+                iconSize: 25,
+                icon: const Icon(Icons.bookmark,color: Colors.purple,),
+                onPressed: () {
+                  // ...
+                },
               ),
             ],
           ),
@@ -39,7 +42,7 @@ class HomePage extends StatelessWidget {
           height: 10,
         ),
         Padding(
-          padding:const  EdgeInsets.symmetric(horizontal: 25.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -56,10 +59,13 @@ class HomePage extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.search_sharp),
+                  icon: const Icon(
+                    Icons.search_sharp,
+                    color: Colors.purple,
+                  ),
                   onPressed: () {},
                 ),
-               const Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Search address, city, location',
@@ -68,7 +74,6 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
