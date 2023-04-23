@@ -1,62 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:room_locator/add_page.dart';
-import 'package:room_locator/home_page.dart';
-import 'package:room_locator/widgets/drawerr.dart';
+import '/screens/home_screen.dart';
+import '/screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.purple),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int currpage = 0;
-
-  List<Widget> pages = [const HomePage(), const AddPage()];
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-       
-        drawer: const Drawerr(),
-        body: IndexedStack(
-          index: currpage,
-          children: pages,
-        ),
-        bottomNavigationBar: NavigationBar(
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.business), label: "Ads"),
-          ],
-          onDestinationSelected: (int index) {
-            setState(() {
-              currpage = index;
-            });
-          },
-          selectedIndex: currpage,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch:const MaterialColor(
+             0xFF210347, // RGB value of 33, 3, 71
+            {
+              50: Color(0xFFE5E0F5),
+              100: Color(0xFFBDB1E1),
+              200: Color(0xFF9481CD),
+              300: Color(0xFF6C52B9),
+              400: Color(0xFF4E2DA9),
+              500: Color(0xFF330371),
+              600: Color(0xFF2E056C),
+              700: Color(0xFF26045F),
+              800: Color(0xFF1F0454),
+              900: Color(0xFF120342),
+            },
+          ),
+        ).copyWith(
+          secondary: Colors.grey,
         ),
       ),
+      home: LoginScreen(),
+      routes: {
+        MyHomePage.routeName: (ctx) => const MyHomePage(),
+      },
     );
   }
 }
+

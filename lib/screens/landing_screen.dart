@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Landing extends StatelessWidget {
+  const Landing({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
               IconButton(
                 icon: const CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage('images/profile.jpg'),
+                  backgroundImage: AssetImage('images/profile2.png'),
                 ),
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
@@ -30,7 +30,10 @@ class HomePage extends StatelessWidget {
               ),
               IconButton(
                 iconSize: 25,
-                icon: const Icon(Icons.bookmark,color: Colors.purple,),
+                icon: const Icon(
+                  Icons.bookmark,
+                  color: Colors.amber,
+                ),
                 onPressed: () {
                   // ...
                 },
