@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/button_view.dart';
 import '/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         color: const Color(0xFF210347),
         child: Padding(
-          padding: const EdgeInsets.only(top:40,left: 10, right: 10),
+          padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -47,11 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   image: AssetImage('images/1.png'),
                 ),
               ),
-             
-
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
-                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
@@ -91,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 18),
                       Container(
                         padding: const EdgeInsets.only(left: 35, right: 4),
                         decoration: BoxDecoration(
@@ -115,18 +114,36 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 18),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            MyHomePage.routeName,
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                     const  MyHomePage(),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                var begin = const Offset(3.0, 0.0);
+                                var end = Offset.zero;
+                                var curve = Curves.ease;
+
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
+
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                           minimumSize:const Size(400, 50),
+                          minimumSize: const Size(400, 50),
                         ),
                         child: const Text('Login'),
                       ),
@@ -134,13 +151,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-              SignInButton(
-                Buttons.Google,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              const SizedBox(height: 30),
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: SignInButton(
+                  Buttons.Google,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  onPressed: _signInWithGoogle,
                 ),
-                onPressed: _signInWithGoogle,
               ),
             ],
           ),

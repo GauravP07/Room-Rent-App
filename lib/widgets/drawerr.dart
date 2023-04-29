@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/screens/search_screen.dart';
 
 class Drawerr extends StatelessWidget {
   const Drawerr({super.key});
@@ -23,13 +24,14 @@ class Drawerr extends StatelessWidget {
             ),
             title: const Text('Search Properties'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context)
+                  .pushReplacementNamed(SearchScreen.routeName);
             },
           ),
           ListTile(
             leading: const Icon(
               Icons.bookmark,
-              color: Colors.pink,
+              color: Colors.purple,
             ),
             title: const Text('WishList'),
             onTap: () {
@@ -46,7 +48,7 @@ class Drawerr extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-         const SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Divider(
@@ -55,7 +57,10 @@ class Drawerr extends StatelessWidget {
             color: Colors.grey[400],
           ),
           ListTile(
-            leading: const Icon(Icons.person, color: Color(0xFF210347)),
+            leading: const Icon(
+              Icons.person,
+              color: Color(0xFF210347),
+            ),
             title: const Text('About Developers'),
             onTap: () {
               Navigator.pop(context);

@@ -14,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currpage = 0;
 
-  List<Widget> pages = [const Landing(), ProfileScreen()];
+  List<Widget> pages = [ Landing(), ProfileScreen()];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -29,8 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         bottomNavigationBar: NavigationBar(
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.home,color:  Color(0xFF210347),), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.person, color:  Color(0xFF210347),), label: "Profile"),
+            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+            NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
           ],
           onDestinationSelected: (int index) {
             setState(() {

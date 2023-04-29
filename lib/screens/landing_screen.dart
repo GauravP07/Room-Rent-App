@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '/providers/rooms.dart';
+import '/widgets/room_item.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
-class Landing extends StatelessWidget {
-  const Landing({Key? key}) : super(key: key);
 
+
+class Landing extends StatefulWidget {
   @override
+  State<Landing> createState() => _LandingState();
+}
+
+class _LandingState extends State<Landing> {
+  // const Landing({Key? key}) : super(key: key);
+   String _cityName = '';
+   @override
+   void initState() {
+    super.initState();
+    _getLocation();
+  }
+
+  Future<void> _getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    // List<Placemark> placemarks = await Geolocator.placemarkFromCoordinates(
+    //     position.latitude, position.longitude);
+      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark placemark = placemarks[0];
+    setState(() {
+      _cityName = placemark.locality!;
+    });
+  }
+
   Widget build(BuildContext context) {
+    final rooms = Provider.of<Rooms>(context);
     return Column(
       children: [
         Container(
@@ -22,17 +52,17 @@ class Landing extends StatelessWidget {
                 },
                 iconSize: 48.0,
               ),
-              const Center(
+               Center(
                 child: Text(
-                  'Current Location',
-                  style: TextStyle(fontSize: 20),
+                  _cityName,
+                  style:const TextStyle(fontSize: 20),
                 ),
               ),
               IconButton(
                 iconSize: 25,
                 icon: const Icon(
                   Icons.bookmark,
-                  color: Colors.amber,
+                  color: Colors.purple,
                 ),
                 onPressed: () {
                   // ...
@@ -79,6 +109,16 @@ class Landing extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: rooms.items.length,
+            itemBuilder: (ctx, i) {
+              return RoomItem(
+                  id: rooms.items[i].id!,
+                );
+            },
           ),
         ),
       ],
